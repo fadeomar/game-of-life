@@ -1,6 +1,3 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
-/* eslint-disable jsx-a11y/interactive-supports-focus */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from "react";
 import PropTypes from "prop-types";
 
@@ -10,6 +7,9 @@ const Box = ({ boxClass, id, selectBox, row, col }) => (
     id={id}
     role="button"
     onClick={() => selectBox(row, col)}
+    aria-label="Box"
+    tabIndex="0"
+    onKeyDown
   />
 );
 

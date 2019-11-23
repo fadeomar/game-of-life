@@ -22,15 +22,6 @@ class Main extends Component {
     this.playButton();
   }
 
-  // selectBox = (row, col) => {
-  //   // const gridCopy = this.arrayClone(this.state.gridFull);
-  //   // gridCopy[row][col] = !gridCopy[row][col];
-  //   // this.setState({ gridFull: gridCopy });
-  //   this.setState(({ gridFull }) => {
-  //     gridFull[row][col] = !gridFull[row][col];
-  //     return gridFull;
-  //   });
-  // };
   selectBox = (row, col) => {
     const { gridFull: prevGrid } = this.state;
     const gridFull = prevGrid.map((rowArr, rowIdx) =>
