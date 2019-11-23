@@ -1,37 +1,39 @@
-import React, { Component } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import Box from "../box";
 
-class Grid extends Component {
-  state = {};
+const Grid = ({ cols, selectBox, gridFull }) => {
+  const width = cols * 14;
 
-  render() {
-    const width = this.props.cols * 16 + 1;
-    const rowsArr = [];
+  let boxClass = "";
+  const rowsArr = gridFull.map((rowArr, rowIdx) =>
+    rowArr.map((item, colIdx) => {
+      const boxId = `${rowIdx}_${colIdx}`;
 
-    let boxClass = "";
-    for (let i = 0; i < this.props.rows; i++) {
-      for (let j = 0; j < this.props.rows; j++) {
-        const boxId = `${i}_${j}`;
+      boxClass = gridFull[rowIdx][colIdx] ? "box on" : "box off";
+      return (
+        <Box
+          boxClass={boxClass}
+          key={boxId}
+          boxId={boxId}
+          row={rowIdx}
+          col={colIdx}
+          selectBox={selectBox}
+        />
+      );
+    })
+  );
+  return (
+    <div className="grid" style={{ width }}>
+      {rowsArr}
+    </div>
+  );
+};
 
-        boxClass = this.props.gridFull[i][j] ? "box on" : "box off";
-        rowsArr.push(
-          <Box
-            boxClass={boxClass}
-            key={boxId}
-            boxId={boxId}
-            row={i}
-            col={j}
-            selectBox={this.props.selectBox}
-          />
-        );
-      }
-    }
-    return (
-      <div className="grid" style={{ width }}>
-        {rowsArr}
-      </div>
-    );
-  }
-}
+Grid.propTypes = {
+  cols: PropTypes.number.isRequired,
+  selectBox: PropTypes.string.isRequired,
+  gridFull: PropTypes.arrayOf().isRequired
+};
 
 export default Grid;
